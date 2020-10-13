@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.domain.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +32,11 @@ public class Autor {
 	@Column(nullable = false)
 	private String descricao;
 
-	private Date dataCadastro;
+	private LocalDateTime dataCadastro;
 
 	@Deprecated
 	public Autor() {
-		this.dataCadastro = new Date();
+		this.dataCadastro = LocalDateTime.now();
 	}
 
 	public Autor(@NotEmpty String nome, @NotEmpty @Email String email, @NotEmpty @Size(max = 400) String descricao) {
@@ -75,7 +75,7 @@ public class Autor {
 		this.descricao = descricao;
 	}
 
-	public Date getDataCadastro() {
+	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}
 
