@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import br.com.zup.casadocodigo.api.utils.ValorUnico;
 import br.com.zup.casadocodigo.domain.models.Autor;
 
 public class AutorDtoRequest {
@@ -13,6 +14,7 @@ public class AutorDtoRequest {
 
 	@NotEmpty
 	@Email
+	@ValorUnico(atributo = "email", classe = Autor.class)
 	private String email;
 
 	@NotEmpty
