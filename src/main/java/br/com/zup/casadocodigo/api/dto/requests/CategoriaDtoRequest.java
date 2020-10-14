@@ -1,15 +1,16 @@
 package br.com.zup.casadocodigo.api.dto.requests;
 
-import javax.validation.constraints.NotEmpty;
-
 import br.com.zup.casadocodigo.domain.models.Categoria;
 
 public class CategoriaDtoRequest {
 
-	@NotEmpty
 	private String nome;
 
-	public CategoriaDtoRequest(@NotEmpty String nome) {
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 

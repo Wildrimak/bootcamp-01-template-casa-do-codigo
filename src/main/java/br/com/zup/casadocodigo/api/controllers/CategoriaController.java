@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +24,7 @@ public class CategoriaController { // cdd : 3
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity<?> cadastrar(@Valid @RequestBody CategoriaDtoRequest categoriaDtoRequest,
+	public ResponseEntity<?> cadastrar(@RequestBody CategoriaDtoRequest categoriaDtoRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 
 		Categoria categoria = categoriaDtoRequest.toModel();
