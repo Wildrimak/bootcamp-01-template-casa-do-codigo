@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.validators;
+package br.com.zup.casadocodigo.compartilhado;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ValorUnico {
+public @interface ValorUnicoAnnotation {
 
 	String message() default "Este valor já foi cadastrado, tente um valor diferente";
 

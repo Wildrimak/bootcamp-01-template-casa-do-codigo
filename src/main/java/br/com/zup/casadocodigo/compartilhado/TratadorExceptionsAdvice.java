@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.advice;
+package br.com.zup.casadocodigo.compartilhado;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class NegocioControllerAdvice {
+public class TratadorExceptionsAdvice {
 
 	@Autowired
 	private MessageSource messageSource;
@@ -43,7 +43,7 @@ public class NegocioControllerAdvice {
 
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(hashMap);
 	}
-	
+
 	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> trataParaHttpMessageNotReadableException(
 			HttpMessageNotReadableException exception) {
@@ -57,8 +57,7 @@ public class NegocioControllerAdvice {
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<Map<String, String>> trataIllegalStateException (
-			IllegalStateException exception) {
+	public ResponseEntity<Map<String, String>> trataIllegalStateException(IllegalStateException exception) {
 
 		String erro = exception.getMessage();
 
@@ -67,7 +66,7 @@ public class NegocioControllerAdvice {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hashMap);
 	}
-	
+
 	private String getErrorMessage(ObjectError error) {
 		return messageSource.getMessage(error, LocaleContextHolder.getLocale());
 	}

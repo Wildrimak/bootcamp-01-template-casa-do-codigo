@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.validators;
+package br.com.zup.casadocodigo.compartilhado;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.util.Assert;
 
-public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, Object> {
+public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnotation, Object> {
 
 	private String atributo;
 	private Class<?> classe;
@@ -19,7 +19,7 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, Obje
 	private EntityManager manager;
 
 	@Override
-	public void initialize(ValorUnico parametros) {
+	public void initialize(ValorUnicoAnnotation parametros) {
 
 		this.atributo = parametros.atributo();
 		this.classe = parametros.classe();

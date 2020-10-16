@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.controllers;
+package br.com.zup.casadocodigo.cadastrocategoria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import br.com.zup.casadocodigo.api.dto.requests.CategoriaDtoRequest;
-import br.com.zup.casadocodigo.domain.models.Categoria;
 
 @RestController
 @RequestMapping("/categorias")

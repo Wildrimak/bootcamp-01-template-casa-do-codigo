@@ -1,11 +1,10 @@
-package br.com.zup.casadocodigo.api.dto.requests;
+package br.com.zup.casadocodigo.cadastrocategoria;
 
-import br.com.zup.casadocodigo.api.validators.ValorUnico;
-import br.com.zup.casadocodigo.domain.models.Categoria;
+import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
 
 public class CategoriaDtoRequest {
 
-	@ValorUnico(atributo = "nome", classe = Categoria.class)
+	@ValorUnicoAnnotation(atributo = "nome", classe = Categoria.class)
 	private String nome;
 
 	public String getNome() {

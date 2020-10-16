@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.domain.models;
+package br.com.zup.casadocodigo.cadastroautor;
 
 import java.time.LocalDateTime;
 

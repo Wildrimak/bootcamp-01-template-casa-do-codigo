@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dto.requests;
+package br.com.zup.casadocodigo.cadastrolivro;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,16 +16,15 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
-import br.com.zup.casadocodigo.api.validators.ValorUnico;
-import br.com.zup.casadocodigo.domain.models.Autor;
-import br.com.zup.casadocodigo.domain.models.Categoria;
-import br.com.zup.casadocodigo.domain.models.Livro;
+import br.com.zup.casadocodigo.cadastroautor.Autor;
+import br.com.zup.casadocodigo.cadastrocategoria.Categoria;
+import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
 
 
 public class LivroDtoRequest {
 
 	@NotEmpty
-	@ValorUnico(atributo = "titulo", classe = Livro.class)
+	@ValorUnicoAnnotation(atributo = "titulo", classe = Livro.class)
     private String titulo;
 
 	@NotEmpty
@@ -43,7 +42,7 @@ public class LivroDtoRequest {
 	private Integer quantidadePaginas;
     
 	@NotEmpty
-	@ValorUnico(atributo = "isbn", classe = Livro.class)
+	@ValorUnicoAnnotation(atributo = "isbn", classe = Livro.class)
 	private String isbn;
 
 	@Future

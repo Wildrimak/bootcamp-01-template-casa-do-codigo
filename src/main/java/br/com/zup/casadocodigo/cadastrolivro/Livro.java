@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.domain.models;
+package br.com.zup.casadocodigo.cadastrolivro;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +15,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.zup.casadocodigo.cadastroautor.Autor;
+import br.com.zup.casadocodigo.cadastrocategoria.Categoria;
 import lombok.Getter;
 import lombok.Setter;
 
