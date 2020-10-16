@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.utils;
+package br.com.zup.casadocodigo.api.validators;
 
 import java.util.List;
 

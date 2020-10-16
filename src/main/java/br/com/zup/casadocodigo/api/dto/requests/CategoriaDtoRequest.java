@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.api.dto.requests;
 
-import br.com.zup.casadocodigo.api.utils.ValorUnico;
+import br.com.zup.casadocodigo.api.validators.ValorUnico;
 import br.com.zup.casadocodigo.domain.models.Categoria;
 
 public class CategoriaDtoRequest {

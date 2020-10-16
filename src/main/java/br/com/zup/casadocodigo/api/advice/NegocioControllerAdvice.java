@@ -9,6 +9,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,7 +23,7 @@ public class NegocioControllerAdvice {
 	private MessageSource messageSource;
 
 	@ExceptionHandler
-	public ResponseEntity<Map<String, String>> tratamentoParaMethodArgumentNotValidException(
+	public ResponseEntity<Map<String, String>> trataMethodArgumentNotValidException(
 			MethodArgumentNotValidException exception) {
 
 		List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
@@ -42,7 +43,31 @@ public class NegocioControllerAdvice {
 
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(hashMap);
 	}
+	
+	@ExceptionHandler
+	public ResponseEntity<Map<String, String>> trataParaHttpMessageNotReadableException(
+			HttpMessageNotReadableException exception) {
 
+		String erro = exception.getMessage();
+
+		Map<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("ErroGlobal", erro);
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hashMap);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<Map<String, String>> trataIllegalStateException (
+			IllegalStateException exception) {
+
+		String erro = exception.getMessage();
+
+		Map<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("ErroGlobal", erro);
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hashMap);
+	}
+	
 	private String getErrorMessage(ObjectError error) {
 		return messageSource.getMessage(error, LocaleContextHolder.getLocale());
 	}

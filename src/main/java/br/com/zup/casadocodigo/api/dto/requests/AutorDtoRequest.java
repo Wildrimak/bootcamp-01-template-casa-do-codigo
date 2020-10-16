@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import br.com.zup.casadocodigo.api.utils.ValorUnico;
+import br.com.zup.casadocodigo.api.validators.ValorUnico;
 import br.com.zup.casadocodigo.domain.models.Autor;
 
 public class AutorDtoRequest {
