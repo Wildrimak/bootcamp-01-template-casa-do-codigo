@@ -1,13 +1,11 @@
-package br.com.zup.casadocodigo.estado;
+package br.com.zup.casadocodigo.paisestado;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.util.Assert;
-
+import br.com.zup.casadocodigo.compartilhado.ExisteIdAnnotation;
 import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
-import br.com.zup.casadocodigo.pais.Pais;
 
 public class EstadoRequesDto {
 
@@ -16,6 +14,7 @@ public class EstadoRequesDto {
 	private String nome;
 
 	@NotNull
+	@ExisteIdAnnotation(atributo = "id", classe = Pais.class)
 	private Integer idPais;
 
 	public EstadoRequesDto(@NotEmpty String nome, @NotNull Integer idPais) {
@@ -25,12 +24,7 @@ public class EstadoRequesDto {
 
 	public Estado toModel(EntityManager entityManager) {
 
-		@NotNull
-		Pais pais = entityManager.find(Pais.class, this.idPais);
-
-		Assert.notNull(pais, "Não existe esse pais cadastrado cujo id é " + this.idPais);
-
-		Estado estado = new Estado(this.nome, pais);
+		Estado estado = new Estado(this.nome, entityManager.find(Pais.class, this.idPais));
 
 		return estado;
 	}

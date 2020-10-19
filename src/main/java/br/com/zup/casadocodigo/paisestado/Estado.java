@@ -1,7 +1,4 @@
-package br.com.zup.casadocodigo.estado;
-
-
-import java.util.Date;
+package br.com.zup.casadocodigo.paisestado;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 
-import br.com.zup.casadocodigo.pais.Pais;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,16 +18,11 @@ public class Estado {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idEstado;
+	private Integer id;
 
 	@NotEmpty
 	@Column(nullable = false)
 	private String nome;
-	
-	private String alfa;
-	private String beta;
-	private String delta;
-	private Date theta;
 
 	@ManyToOne
 	private Pais pais;

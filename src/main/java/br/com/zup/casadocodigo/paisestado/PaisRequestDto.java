@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.pais;
+package br.com.zup.casadocodigo.paisestado;
 
 import javax.validation.constraints.NotEmpty;
 

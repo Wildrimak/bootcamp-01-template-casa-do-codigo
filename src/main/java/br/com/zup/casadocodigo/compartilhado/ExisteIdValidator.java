@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.util.Assert;
 
-public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnotation, Object> {
+public class ExisteIdValidator implements ConstraintValidator<ExisteIdAnnotation, Object> {
 
 	private String atributo;
 	private Class<?> classe;
@@ -19,7 +19,7 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnota
 	private EntityManager manager;
 
 	@Override
-	public void initialize(ValorUnicoAnnotation parametros) {
+	public void initialize(ExisteIdAnnotation parametros) {
 		this.atributo = parametros.atributo();
 		this.classe = parametros.classe();
 
@@ -32,10 +32,9 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnota
 
 		List<?> list = query.getResultList();
 
-		Assert.state(list.size() <= 1,
-				"Em " + classe + " o campo " + atributo + " de valor " + value + " já foi cadastrado(a)");
+		Assert.state(list.size() == 1,
+				"Esse valor em " + classe.getName() + " no campo " + atributo + ": " + value + " não existe");
 
-		return list.isEmpty();
+		return !list.isEmpty();
 	}
-
 }
