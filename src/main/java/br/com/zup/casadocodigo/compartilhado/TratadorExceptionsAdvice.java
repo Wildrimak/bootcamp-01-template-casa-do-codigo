@@ -67,7 +67,7 @@ public class TratadorExceptionsAdvice {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hashMap);
 	}
 	
-//	@ExceptionHandler
+	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> trataIllegalArgumentException(IllegalArgumentException exception) {
 
 		String erro = exception.getMessage();

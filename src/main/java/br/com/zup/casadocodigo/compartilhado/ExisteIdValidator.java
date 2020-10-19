@@ -33,7 +33,7 @@ public class ExisteIdValidator implements ConstraintValidator<ExisteIdAnnotation
 		List<?> list = query.getResultList();
 
 		Assert.state(list.size() == 1,
-				"Esse valor em " + classe.getName() + " no campo " + atributo + ": " + value + " não existe");
+				"Esse valor em " + classe.getSimpleName() + " no campo " + atributo + ": " + value + " não existe!");
 
 		return !list.isEmpty();
 	}
