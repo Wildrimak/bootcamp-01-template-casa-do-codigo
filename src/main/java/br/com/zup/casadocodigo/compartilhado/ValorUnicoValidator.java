@@ -20,7 +20,6 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnota
 
 	@Override
 	public void initialize(ValorUnicoAnnotation parametros) {
-
 		this.atributo = parametros.atributo();
 		this.classe = parametros.classe();
 
@@ -28,7 +27,6 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnota
 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
-
 		Query query = manager.createQuery("select 1 from " + classe.getName() + "" + " where " + atributo + "=:value");
 		query.setParameter("value", value);
 

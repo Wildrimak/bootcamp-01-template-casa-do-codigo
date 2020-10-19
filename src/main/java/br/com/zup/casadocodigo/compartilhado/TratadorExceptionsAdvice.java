@@ -66,6 +66,17 @@ public class TratadorExceptionsAdvice {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hashMap);
 	}
+	
+//	@ExceptionHandler
+	public ResponseEntity<Map<String, String>> trataIllegalArgumentException(IllegalArgumentException exception) {
+
+		String erro = exception.getMessage();
+
+		Map<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("ErroGlobal", erro);
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hashMap);
+	}
 
 	private String getErrorMessage(ObjectError error) {
 		return messageSource.getMessage(error, LocaleContextHolder.getLocale());

@@ -29,7 +29,7 @@ public class LivroController {
 		entityManager.persist(livro);
 
 		return ResponseEntity
-				.created(uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(livro.getId()).toUri())
+				.created(uriComponentsBuilder.path("/livros/{id}").buildAndExpand(livro.getId()).toUri())
 				.body(livro);
 
 	}
