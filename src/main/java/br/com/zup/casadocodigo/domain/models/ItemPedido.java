@@ -20,6 +20,9 @@ public class ItemPedido {
 	@NotNull
 	@ManyToOne
 	private Livro livro;
+	
+	@ManyToOne
+	private Pedido pedido;
 
 	@NotNull
 	@Positive

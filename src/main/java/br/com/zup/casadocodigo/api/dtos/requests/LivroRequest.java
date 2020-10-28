@@ -84,13 +84,11 @@ public class LivroRequest {
 	@Transactional
     public Livro toModel(EntityManager entityManager){
         
-		System.out.println("DATA PUB: " + dataPublicacao);
-
         @NotNull Autor autor = entityManager.find(Autor.class, idAutor);
     	@NotNull Categoria categoria = entityManager.find(Categoria.class, idCategoria);
     	
     	Assert.state(autor != null, "Não existe Autor com id " + idAutor + " no banco de dados");
-		Assert.state(categoria != null, "Não existe Livro com id " + idCategoria + " no banco de dados");
+		Assert.state(categoria != null, "Não existe Categoria com id " + idCategoria + " no banco de dados");
     	
     	return new Livro(titulo, resumo, sumario, preco, quantidadePaginas, isbn, dataPublicacao, categoria, autor);
    

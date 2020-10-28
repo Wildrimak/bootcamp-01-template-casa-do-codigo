@@ -1,7 +1,6 @@
 package br.com.zup.casadocodigo.api.dtos.requests;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,22 +24,17 @@ public class PedidoRequest {
 	private List<ItemPedidoRequest> itens;
 
 	public PedidoRequest(@NotNull @Positive BigDecimal total, @Size(min = 1) List<ItemPedidoRequest> itens) {
+		System.out.println("Estou tentando pelo menos criar o pedidoRequest");
 		this.total = total;
 		this.itens = itens;
-	}
-
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	public List<ItemPedidoRequest> getItens() {
-		return Collections.unmodifiableList(itens);
 	}
 
 	public Pedido toModel(EntityManager entityManager) {
 
 		Pedido pedido = new Pedido();
 
+		System.out.println("Antes percorrer a lista de itens pedidos");
+		
 		List<ItemPedido> itensPedidos = itens.stream()
 				.map(itemPedidoRequest -> itemPedidoRequest.toModel(entityManager)).collect(Collectors.toList());
 

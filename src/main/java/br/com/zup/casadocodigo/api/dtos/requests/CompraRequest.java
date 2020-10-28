@@ -13,6 +13,7 @@ import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;
+import br.com.zup.casadocodigo.domain.models.Pedido;
 
 public class CompraRequest {
 
@@ -38,6 +39,7 @@ public class CompraRequest {
 	@NotEmpty
 	private String cidade;
 
+	// Pais -> 1
 	@NotNull
 	@ExisteIdAnnotation(classe = Pais.class, atributo = "id")
 	private Integer idPais;
@@ -50,14 +52,24 @@ public class CompraRequest {
 	@NotEmpty
 	private String cep;
 
-	@Valid
-	@NotNull
+	// PedidoRequest -> 2
+//	@Valid
+//	@NotNull Alterar o message.properties tambem
 	private PedidoRequest pedidoRequest;
 
-	public CompraRequest(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
-			@NotEmpty String documento, @NotEmpty String endereco, @NotEmpty String complemento,
-			@NotEmpty String cidade, @NotNull Integer idPais, Integer idEstado, @NotEmpty String telefone,
-			@NotEmpty String cep, @Valid @NotNull PedidoRequest pedidoRequest) {
+	public CompraRequest(@
+			NotEmpty @Email String email, 
+			@NotEmpty String nome, 
+			@NotEmpty String sobrenome,
+			@NotEmpty String documento, 
+			@NotEmpty String endereco, 
+			@NotEmpty String complemento,
+			@NotEmpty String cidade, 
+			@NotNull Integer idPais, 
+			Integer idEstado, 
+			@NotEmpty String telefone,
+			@NotEmpty String cep, 
+			@Valid PedidoRequest pedidoRequest) {
 
 		this.email = email;
 		this.nome = nome;
@@ -82,35 +94,60 @@ public class CompraRequest {
 		CNPJValidator cnpjValidator = new CNPJValidator();
 		cnpjValidator.initialize(null);
 
+		// branch oculta -> 5
 		return cpfValidator.isValid(documento, null) || cnpjValidator.isValid(documento, null);
 
 	}
 
 	public boolean estaEstadoValido(EntityManager entityManager) {
 
-		//Eu não sei em que ordem a bean validation vai invocar as annotations
-		//Não é responsabilidade deste metodo validar se os ids são nulos, não é aqui que faz isso
-		if(idEstado.equals(null) || idPais.equals(null)) {
+		// Uso de branch -> 3
+		// Eu não sei em que ordem a bean validation vai invocar as annotations
+		// Não é responsabilidade deste metodo validar se os ids são nulos, não é aqui
+		// que faz isso
+		if (idEstado.equals(null) || idPais.equals(null)) {
 			return true;
 		}
-		
+
+		// Estado -> 4
 		Estado estado = entityManager.find(Estado.class, idEstado);
 		Pais pais = entityManager.find(Pais.class, idPais);
-		
-		
-		
+
+		// branch oculta -> 6
 		return pais.temEsse(estado);
 
 	}
 
+	// Falta validar se o estado ta valido, mas irei fazer isso quando criar a validation de estado pertence a pais
 	public Compra toModel(EntityManager entityManager) {
 
 		Pais pais = entityManager.find(Pais.class, this.idPais);
 		Estado estado = entityManager.find(Estado.class, this.idEstado);
 
+		
+		System.out.println("Antes de criar compra no toModel de CompraRequest");
+		// Compra > 7
+		System.out.println(email + ""
+				+ "\n" + nome + ""
+				+ "\n" + sobrenome + ""
+				+ "\n" + documento + ""
+				+ "\n" + endereco + ""
+				+ "\n" + complemento + ""
+				+ "\n" + cidade + ""
+				+ "\n" + idPais + ""
+				+ "\n" + idEstado + ""
+				+ "\n" + telefone + ""
+				+ "\n" + cep + ""
+				+ "\n" + pedidoRequest + "");
+		
+		// Pedido -> 8
+		Pedido pedido = this.pedidoRequest.toModel(entityManager);
+		
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
-				telefone, cep, this.pedidoRequest.toModel(entityManager));
+				telefone, cep, pedido);
 
+		System.out.println(compra);
+		
 		return compra;
 	}
 

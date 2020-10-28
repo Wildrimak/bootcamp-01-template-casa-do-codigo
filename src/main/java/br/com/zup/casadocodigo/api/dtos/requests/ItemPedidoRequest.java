@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos.requests;
+	package br.com.zup.casadocodigo.api.dtos.requests;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
@@ -25,6 +25,8 @@ public class ItemPedidoRequest {
 
 	public ItemPedido toModel(EntityManager entityManager) {
 
+		System.out.println("Antes de buscar livro no toModel do ItemPedido");
+		
 		Livro livro = entityManager.find(Livro.class, this.idLivro);
 		ItemPedido itemPedido = new ItemPedido(livro, this.quantidade);
 

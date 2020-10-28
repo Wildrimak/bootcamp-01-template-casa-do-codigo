@@ -3,6 +3,7 @@ package br.com.zup.casadocodigo.domain.models;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -67,7 +68,7 @@ public class Compra {
 	private String cep;
 	
 	@NotNull
-	@OneToOne(mappedBy = "compra",cascade = CascadeType.PERSIST)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.PERSIST)
 	private Pedido pedido;
 
 	@Deprecated
@@ -87,7 +88,9 @@ public class Compra {
 			@NotEmpty String telefone, 
 			@NotEmpty String cep,
 			@NotNull Pedido pedido) {
-
+		
+		System.out.println("Verificando se compra está sendo chamado");
+		
 		this.email = email;
 		this.nome = nome;
 		this.sobrenome = sobrenome;

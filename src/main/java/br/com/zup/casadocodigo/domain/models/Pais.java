@@ -3,10 +3,12 @@ package br.com.zup.casadocodigo.domain.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -19,6 +21,7 @@ public class Pais {
 	@NotEmpty
 	private String nome;
 
+	@OneToMany(mappedBy = "pais", cascade = CascadeType.ALL)
 	private Set<Estado> estados;
 
 	@Deprecated
