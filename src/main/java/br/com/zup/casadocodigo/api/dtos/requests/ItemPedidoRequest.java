@@ -1,9 +1,11 @@
 package br.com.zup.casadocodigo.api.dtos.requests;
 
+import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
+import br.com.zup.casadocodigo.domain.models.ItemPedido;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
 public class ItemPedidoRequest {
@@ -21,12 +23,13 @@ public class ItemPedidoRequest {
 		this.quantidade = quantidade;
 	}
 
-	public Integer getIdLivro() {
-		return idLivro;
-	}
+	public ItemPedido toModel(EntityManager entityManager) {
 
-	public Integer getQuantidade() {
-		return quantidade;
+		Livro livro = entityManager.find(Livro.class, this.idLivro);
+		ItemPedido itemPedido = new ItemPedido(livro, this.quantidade);
+
+		return itemPedido;
+
 	}
 
 }

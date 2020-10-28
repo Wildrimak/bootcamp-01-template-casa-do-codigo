@@ -1,11 +1,17 @@
 package br.com.zup.casadocodigo.api.dtos.requests;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
+import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
+
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
+import br.com.zup.casadocodigo.domain.models.Compra;
+import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;
 
 public class CompraRequest {
@@ -68,52 +74,44 @@ public class CompraRequest {
 
 	}
 
-	public String getEmail() {
-		return email;
+	public boolean estaDocumentoValido() {
+
+		CPFValidator cpfValidator = new CPFValidator();
+		cpfValidator.initialize(null);
+
+		CNPJValidator cnpjValidator = new CNPJValidator();
+		cnpjValidator.initialize(null);
+
+		return cpfValidator.isValid(documento, null) || cnpjValidator.isValid(documento, null);
+
 	}
 
-	public String getNome() {
-		return nome;
+	public boolean estaEstadoValido(EntityManager entityManager) {
+
+		//Eu não sei em que ordem a bean validation vai invocar as annotations
+		//Não é responsabilidade deste metodo validar se os ids são nulos, não é aqui que faz isso
+		if(idEstado.equals(null) || idPais.equals(null)) {
+			return true;
+		}
+		
+		Estado estado = entityManager.find(Estado.class, idEstado);
+		Pais pais = entityManager.find(Pais.class, idPais);
+		
+		
+		
+		return pais.temEsse(estado);
+
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
-	}
+	public Compra toModel(EntityManager entityManager) {
 
-	public String getDocumento() {
-		return documento;
-	}
+		Pais pais = entityManager.find(Pais.class, this.idPais);
+		Estado estado = entityManager.find(Estado.class, this.idEstado);
 
-	public String getEndereco() {
-		return endereco;
-	}
+		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
+				telefone, cep, this.pedidoRequest.toModel(entityManager));
 
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public Integer getIdPais() {
-		return idPais;
-	}
-
-	public Integer getIdEstado() {
-		return idEstado;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public PedidoRequest getPedidoRequest() {
-		return pedidoRequest;
+		return compra;
 	}
 
 	@Override

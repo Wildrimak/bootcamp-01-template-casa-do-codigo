@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
-import br.com.zup.casadocodigo.api.utils.CriaCompra;
 import br.com.zup.casadocodigo.domain.models.Compra;
 
 @RestController
@@ -28,7 +27,7 @@ public class CompraController {
 	public ResponseEntity<?> realizarCompra(@RequestBody @Valid CompraRequest request,
 			UriComponentsBuilder uriComponentsBuilder) {
 
-		Compra compra = new CriaCompra(entityManager, request).getCompra();
+		Compra compra = request.toModel(entityManager);
 
 		entityManager.persist(compra);
 
