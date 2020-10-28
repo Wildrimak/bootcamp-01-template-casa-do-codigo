@@ -4,8 +4,8 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import br.com.zup.casadocodigo.compartilhado.ExisteIdAnnotation;
-import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
+import br.com.zup.casadocodigo.annotations.ExisteIdAnnotation;
+import br.com.zup.casadocodigo.annotations.ValorUnicoAnnotation;
 
 public class EstadoRequesDto {
 

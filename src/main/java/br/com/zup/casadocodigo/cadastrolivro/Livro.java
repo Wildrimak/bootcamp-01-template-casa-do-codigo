@@ -31,7 +31,7 @@ public class Livro {
 
 	@NotEmpty
 	@Column(nullable = false)
-    private String titulo;
+	private String titulo;
 
 	@NotEmpty
 	@Size(max = 500)
@@ -39,17 +39,17 @@ public class Livro {
 	private String resumo;
 
 	private String sumario;
-    
+
 	@NotNull
 	@Min(20)
 	@Column(nullable = false)
 	private BigDecimal preco;
-    
+
 	@NotNull
 	@Min(100)
 	@Column(nullable = false)
 	private Integer quantidadePaginas;
-    
+
 	@NotEmpty
 	@Column(nullable = false)
 	private String isbn;
@@ -58,19 +58,20 @@ public class Livro {
 	@NotNull
 	@Column(nullable = false)
 	private LocalDate dataPublicacao;
-	
+
 	@ManyToOne
 	private Categoria categoria;
-	
+
 	@ManyToOne
 	private Autor autor;
 
-	@Deprecated
 	public Livro() {
 	}
 
-	public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer quantidadePaginas, String isbn,
-			LocalDate dataPublicacao, Categoria categoria, Autor autor) {
+	public Livro(@NotEmpty String titulo, @NotEmpty @Size(max = 500) String resumo, String sumario,
+			@NotNull @Min(20) BigDecimal preco, @NotNull @Min(100) Integer quantidadePaginas, @NotEmpty String isbn,
+			@Future @NotNull LocalDate dataPublicacao, Categoria categoria, Autor autor) {
+
 		this.titulo = titulo;
 		this.resumo = resumo;
 		this.sumario = sumario;
@@ -81,4 +82,5 @@ public class Livro {
 		this.categoria = categoria;
 		this.autor = autor;
 	}
+
 }

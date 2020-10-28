@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.cadastrocategoria;
 
-import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
+import br.com.zup.casadocodigo.annotations.ValorUnicoAnnotation;
 
 public class CategoriaDtoRequest {
 

@@ -1,15 +1,14 @@
-package br.com.zup.casadocodigo.realizarcompra;
+package br.com.zup.casadocodigo.realizarcompra.dtos;
 
-import javax.persistence.EntityManager;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import br.com.zup.casadocodigo.compartilhado.ExisteIdAnnotation;
-import br.com.zup.casadocodigo.paisestado.Estado;
+import br.com.zup.casadocodigo.annotations.ExisteIdAnnotation;
 import br.com.zup.casadocodigo.paisestado.Pais;
 
-public class CompraRequestDto {
+public class CompraRequest {
 
 	@Email
 	@NotEmpty
@@ -45,10 +44,14 @@ public class CompraRequestDto {
 	@NotEmpty
 	private String cep;
 
-	public CompraRequestDto(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
+	@Valid
+	@NotNull
+	private PedidoRequest pedidoRequest;
+
+	public CompraRequest(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
 			@NotEmpty String documento, @NotEmpty String endereco, @NotEmpty String complemento,
 			@NotEmpty String cidade, @NotNull Integer idPais, Integer idEstado, @NotEmpty String telefone,
-			@NotEmpty String cep) {
+			@NotEmpty String cep, @Valid @NotNull PedidoRequest pedidoRequest) {
 
 		this.email = email;
 		this.nome = nome;
@@ -61,22 +64,56 @@ public class CompraRequestDto {
 		this.idEstado = idEstado;
 		this.telefone = telefone;
 		this.cep = cep;
+		this.pedidoRequest = pedidoRequest;
 
 	}
 
-	public Compra toModel(EntityManager entityManager) {
+	public String getEmail() {
+		return email;
+	}
 
-		Pais pais = entityManager.find(Pais.class, idPais);
-		Estado estado = null;
+	public String getNome() {
+		return nome;
+	}
 
-		if (idEstado != null) {
-			estado = entityManager.find(Estado.class, idEstado);
-		}
+	public String getSobrenome() {
+		return sobrenome;
+	}
 
-		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
-				telefone, cep);
+	public String getDocumento() {
+		return documento;
+	}
 
-		return compra;
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public Integer getIdPais() {
+		return idPais;
+	}
+
+	public Integer getIdEstado() {
+		return idEstado;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public PedidoRequest getPedidoRequest() {
+		return pedidoRequest;
 	}
 
 	@Override

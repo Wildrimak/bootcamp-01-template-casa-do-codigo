@@ -1,11 +1,13 @@
-package br.com.zup.casadocodigo.realizarcompra;
+package br.com.zup.casadocodigo.realizarcompra.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -65,6 +67,10 @@ public class Compra {
 
 	@NotEmpty
 	private String cep;
+	
+	@NotNull
+	@OneToOne(mappedBy = "compra",cascade = CascadeType.PERSIST)
+	private Pedido pedido;
 
 	@Deprecated
 	public Compra() {
@@ -81,7 +87,8 @@ public class Compra {
 			@NotNull Pais pais, 
 			Estado estado, 
 			@NotEmpty String telefone, 
-			@NotEmpty String cep) {
+			@NotEmpty String cep,
+			@NotNull Pedido pedido) {
 
 		this.email = email;
 		this.nome = nome;
@@ -94,6 +101,7 @@ public class Compra {
 		this.estado = estado;
 		this.telefone = telefone;
 		this.cep = cep;
+		this.pedido = pedido;
 	}
 
 	@Override

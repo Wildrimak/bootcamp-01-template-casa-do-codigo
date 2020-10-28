@@ -16,9 +16,9 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
+import br.com.zup.casadocodigo.annotations.ValorUnicoAnnotation;
 import br.com.zup.casadocodigo.cadastroautor.Autor;
 import br.com.zup.casadocodigo.cadastrocategoria.Categoria;
-import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
 
 
 public class LivroDtoRequest {

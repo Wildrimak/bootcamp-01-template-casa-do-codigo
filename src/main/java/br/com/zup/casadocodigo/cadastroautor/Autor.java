@@ -34,7 +34,6 @@ public class Autor {
 
 	private LocalDateTime dataCadastro;
 
-	@Deprecated
 	public Autor() {
 		this.dataCadastro = LocalDateTime.now();
 	}

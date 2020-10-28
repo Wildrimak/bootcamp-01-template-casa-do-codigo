@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.compartilhado;
+package br.com.zup.casadocodigo.advices;
 
 import java.util.HashMap;
 import java.util.List;

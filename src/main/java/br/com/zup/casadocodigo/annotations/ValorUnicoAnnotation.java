@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.compartilhado;
+package br.com.zup.casadocodigo.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+
+import br.com.zup.casadocodigo.validators.ValorUnicoValidator;
 
 @Constraint(validatedBy = ValorUnicoValidator.class)
 @Target(ElementType.FIELD)

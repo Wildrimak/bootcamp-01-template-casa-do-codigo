@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import br.com.zup.casadocodigo.compartilhado.ValorUnicoAnnotation;
+import br.com.zup.casadocodigo.annotations.ValorUnicoAnnotation;
 
 public class AutorDtoRequest {
 
