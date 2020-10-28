@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.requests;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PaisRequestDto {
+public class PaisRequest {
 
 	@NotEmpty
 	@ValorUnicoAnnotation(atributo = "nome", classe = Pais.class)

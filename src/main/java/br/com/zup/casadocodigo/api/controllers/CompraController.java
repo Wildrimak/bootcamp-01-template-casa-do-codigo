@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.casadocodigo.api.dtos.CompraRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.api.utils.CriaCompra;
 import br.com.zup.casadocodigo.domain.models.Compra;
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.casadocodigo.api.dtos.LivroListadoDtoResponse;
+import br.com.zup.casadocodigo.api.dtos.responses.LivroListadoResponse;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
 @RestController
@@ -22,15 +22,15 @@ public class ListaLivroController {
 	EntityManager entityManager;
 
 	@GetMapping
-	public ResponseEntity<List<LivroListadoDtoResponse>> listar() {
+	public ResponseEntity<List<LivroListadoResponse>> listar() {
 
 		List<?> livros = entityManager.createQuery("select l from Livro l").getResultList();
 
-		List<LivroListadoDtoResponse> livrosDtoResponse = new ArrayList<>();
+		List<LivroListadoResponse> livrosDtoResponse = new ArrayList<>();
 
 		livros.forEach(livro -> {
 
-			LivroListadoDtoResponse livroDtoResponse = new LivroListadoDtoResponse((Livro) livro);
+			LivroListadoResponse livroDtoResponse = new LivroListadoResponse((Livro) livro);
 			livrosDtoResponse.add(livroDtoResponse);
 
 		});

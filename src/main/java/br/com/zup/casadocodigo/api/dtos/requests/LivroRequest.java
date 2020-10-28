@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.requests;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,7 +22,7 @@ import br.com.zup.casadocodigo.domain.models.Categoria;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
 
-public class LivroDtoRequest {
+public class LivroRequest {
 
 	@NotEmpty
 	@ValorUnicoAnnotation(atributo = "titulo", classe = Livro.class)
@@ -57,7 +57,7 @@ public class LivroDtoRequest {
 	@NotNull
 	private Integer idAutor;
 	
-	public LivroDtoRequest(
+	public LivroRequest(
 			@NotEmpty String titulo,
 			@NotEmpty @Size(max = 500) String resumo, 
 			String sumario,

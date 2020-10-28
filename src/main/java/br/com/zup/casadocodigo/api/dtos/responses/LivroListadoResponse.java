@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.responses;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import br.com.zup.casadocodigo.domain.models.Livro;
 import lombok.Getter;
 
 @Getter
-public class LivroListadoDtoResponse {
+public class LivroListadoResponse {
 
 	private Integer id;
 	private String titulo;
@@ -20,7 +20,7 @@ public class LivroListadoDtoResponse {
 	private Integer idCategoria;
 	private Integer idAutor;
 
-	public LivroListadoDtoResponse(Livro livro) {
+	public LivroListadoResponse(Livro livro) {
 
 		this.id = livro.getId();
 		this.titulo = livro.getTitulo();

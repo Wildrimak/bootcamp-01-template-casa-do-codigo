@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.casadocodigo.api.dtos.LivroDtoResponse;
+import br.com.zup.casadocodigo.api.dtos.responses.LivroDetalheResponse;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
 @RestController
@@ -20,7 +20,7 @@ public class DetalheLivroController {
 	private EntityManager entityManager;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<LivroDtoResponse> detalheLivro(@PathVariable Integer id) {
+	public ResponseEntity<LivroDetalheResponse> detalheLivro(@PathVariable Integer id) {
 
 		Livro livro = entityManager.find(Livro.class, id);
 
@@ -28,7 +28,7 @@ public class DetalheLivroController {
 			return ResponseEntity.notFound().build();
 		}
 
-		return ResponseEntity.ok(new LivroDtoResponse(livro));
+		return ResponseEntity.ok(new LivroDetalheResponse(livro));
 	}
 
 }

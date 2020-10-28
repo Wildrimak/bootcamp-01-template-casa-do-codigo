@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.casadocodigo.api.dtos.AutorDtoRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.AutorRequest;
 import br.com.zup.casadocodigo.domain.models.Autor;
 
 @RestController
@@ -24,10 +24,10 @@ public class AutorController { // cdd : 3
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity<Autor> cadastrarAutor(@Valid @RequestBody AutorDtoRequest autorDtoRequest,
+	public ResponseEntity<Autor> cadastrarAutor(@Valid @RequestBody AutorRequest autorRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 
-		Autor autor = autorDtoRequest.toModel();
+		Autor autor = autorRequest.toModel();
 
 		manager.persist(autor);
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.casadocodigo.api.dtos.PaisRequestDto;
+import br.com.zup.casadocodigo.api.dtos.requests.PaisRequest;
 import br.com.zup.casadocodigo.domain.models.Pais;
 
 @RestController
@@ -24,7 +24,7 @@ public class PaisController {
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity<?> cadastrarPais(@Valid @RequestBody PaisRequestDto request,
+	public ResponseEntity<?> cadastrarPais(@Valid @RequestBody PaisRequest request,
 			UriComponentsBuilder uriComponentsBuilder) {
 
 		Pais pais = new Pais(request.getNome());

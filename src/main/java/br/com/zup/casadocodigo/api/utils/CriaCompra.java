@@ -3,7 +3,7 @@ package br.com.zup.casadocodigo.api.utils;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
-import br.com.zup.casadocodigo.api.dtos.CompraRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;

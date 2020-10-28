@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.casadocodigo.api.dtos.LivroDtoRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.LivroRequest;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
 @RestController
@@ -24,10 +24,10 @@ public class LivroController {
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity<?> cadastrarLivro(@Valid @RequestBody LivroDtoRequest livroDtoRequest,
+	public ResponseEntity<?> cadastrarLivro(@Valid @RequestBody LivroRequest livroRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 
-		Livro livro = livroDtoRequest.toModel(entityManager);
+		Livro livro = livroRequest.toModel(entityManager);
 
 		entityManager.persist(livro);
 

@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.requests;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

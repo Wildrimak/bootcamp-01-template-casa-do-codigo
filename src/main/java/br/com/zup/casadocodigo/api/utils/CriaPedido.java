@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
-import br.com.zup.casadocodigo.api.dtos.ItemPedidoRequest;
-import br.com.zup.casadocodigo.api.dtos.PedidoRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.ItemPedidoRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.PedidoRequest;
 import br.com.zup.casadocodigo.domain.models.ItemPedido;
 import br.com.zup.casadocodigo.domain.models.Livro;
 import br.com.zup.casadocodigo.domain.models.Pedido;

@@ -1,9 +1,9 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.requests;
 
 import br.com.zup.casadocodigo.api.annotations.ValorUnicoAnnotation;
 import br.com.zup.casadocodigo.domain.models.Categoria;
 
-public class CategoriaDtoRequest {
+public class CategoriaRequest {
 
 	@ValorUnicoAnnotation(atributo = "nome", classe = Categoria.class)
 	private String nome;

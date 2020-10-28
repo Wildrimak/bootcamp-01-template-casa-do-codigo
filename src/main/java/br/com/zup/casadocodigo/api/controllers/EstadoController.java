@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.casadocodigo.api.dtos.EstadoRequesDto;
+import br.com.zup.casadocodigo.api.dtos.requests.EstadoRequest;
 import br.com.zup.casadocodigo.domain.models.Estado;
 
 @RestController
@@ -24,7 +24,7 @@ public class EstadoController {
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity<?> cadastrarEstado(@Valid @RequestBody EstadoRequesDto request,
+	public ResponseEntity<?> cadastrarEstado(@Valid @RequestBody EstadoRequest request,
 			UriComponentsBuilder uriComponentsBuilder) {
 
 		Estado estado = request.toModel(manager);

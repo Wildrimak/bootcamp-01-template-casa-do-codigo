@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.requests;
 
 import java.math.BigDecimal;
 import java.util.Collections;

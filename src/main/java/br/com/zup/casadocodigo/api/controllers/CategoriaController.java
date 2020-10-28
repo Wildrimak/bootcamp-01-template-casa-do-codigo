@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.casadocodigo.api.dtos.CategoriaDtoRequest;
+import br.com.zup.casadocodigo.api.dtos.requests.CategoriaRequest;
 import br.com.zup.casadocodigo.domain.models.Categoria;
 
 @RestController
@@ -24,10 +24,10 @@ public class CategoriaController { // cdd : 3
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity<?> cadastrar(@Valid @RequestBody CategoriaDtoRequest categoriaDtoRequest,
+	public ResponseEntity<?> cadastrar(@Valid @RequestBody CategoriaRequest categoriaRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 
-		Categoria categoria = categoriaDtoRequest.toModel();
+		Categoria categoria = categoriaRequest.toModel();
 
 		manager.persist(categoria);
 

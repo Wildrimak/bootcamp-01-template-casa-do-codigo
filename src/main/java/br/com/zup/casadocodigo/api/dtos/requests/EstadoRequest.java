@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.dtos;
+package br.com.zup.casadocodigo.api.dtos.requests;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotEmpty;
@@ -9,7 +9,7 @@ import br.com.zup.casadocodigo.api.annotations.ValorUnicoAnnotation;
 import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;
 
-public class EstadoRequesDto {
+public class EstadoRequest {
 
 	@NotEmpty
 	@ValorUnicoAnnotation(atributo = "nome", classe = Estado.class)
@@ -19,7 +19,7 @@ public class EstadoRequesDto {
 	@ExisteIdAnnotation(atributo = "id", classe = Pais.class)
 	private Integer idPais;
 
-	public EstadoRequesDto(@NotEmpty String nome, @NotNull Integer idPais) {
+	public EstadoRequest(@NotEmpty String nome, @NotNull Integer idPais) {
 		this.nome = nome;
 		this.idPais = idPais;
 	}
