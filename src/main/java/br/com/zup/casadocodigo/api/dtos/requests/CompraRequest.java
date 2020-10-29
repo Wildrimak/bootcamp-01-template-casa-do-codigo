@@ -55,7 +55,7 @@ public class CompraRequest {
 	// PedidoRequest -> 2
 	@Valid
 	@NotNull
-	private PedidoRequest pedidoRequest;
+	private PedidoRequest pedido;
 
 	public CompraRequest(@
 			NotEmpty @Email String email, 
@@ -82,7 +82,7 @@ public class CompraRequest {
 		this.idEstado = idEstado;
 		this.telefone = telefone;
 		this.cep = cep;
-		this.pedidoRequest = pedidoRequest;
+		this.pedido = pedidoRequest;
 
 	}
 
@@ -125,7 +125,7 @@ public class CompraRequest {
 		Estado estado = entityManager.find(Estado.class, this.idEstado);
 
 		// Pedido -> 7
-		Pedido pedido = this.pedidoRequest.toModel(entityManager);
+		Pedido pedido = this.pedido.toModel(entityManager);
 		
 		// Compra > 8
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
