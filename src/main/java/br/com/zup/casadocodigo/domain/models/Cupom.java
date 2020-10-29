@@ -66,4 +66,12 @@ public class Cupom {
 		return id;
 	}
 
+	public void atualizarCupom(Cupom cupomAtualizado) {
+
+		this.codigo = cupomAtualizado.getCodigo();
+		this.percentual = cupomAtualizado.getPercentual();
+		this.validade = cupomAtualizado.getValidade();
+
+	}
+
 }
