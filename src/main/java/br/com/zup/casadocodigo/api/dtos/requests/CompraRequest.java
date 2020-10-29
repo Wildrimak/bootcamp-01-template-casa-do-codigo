@@ -53,8 +53,8 @@ public class CompraRequest {
 	private String cep;
 
 	// PedidoRequest -> 2
-//	@Valid
-//	@NotNull Alterar o message.properties tambem
+	@Valid
+	@NotNull
 	private PedidoRequest pedidoRequest;
 
 	public CompraRequest(@
@@ -124,29 +124,14 @@ public class CompraRequest {
 		Pais pais = entityManager.find(Pais.class, this.idPais);
 		Estado estado = entityManager.find(Estado.class, this.idEstado);
 
-		
-		System.out.println("Antes de criar compra no toModel de CompraRequest");
-		// Compra > 7
-		System.out.println(email + ""
-				+ "\n" + nome + ""
-				+ "\n" + sobrenome + ""
-				+ "\n" + documento + ""
-				+ "\n" + endereco + ""
-				+ "\n" + complemento + ""
-				+ "\n" + cidade + ""
-				+ "\n" + idPais + ""
-				+ "\n" + idEstado + ""
-				+ "\n" + telefone + ""
-				+ "\n" + cep + ""
-				+ "\n" + pedidoRequest + "");
-		
-		// Pedido -> 8
+		// Pedido -> 7
 		Pedido pedido = this.pedidoRequest.toModel(entityManager);
 		
+		// Compra > 8
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
-				telefone, cep, pedido);
+				telefone, cep);
 
-		System.out.println(compra);
+		compra.setPedido(pedido);
 		
 		return compra;
 	}

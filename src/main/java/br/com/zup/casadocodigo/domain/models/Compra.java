@@ -13,11 +13,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
 public class Compra {
 
@@ -86,10 +81,7 @@ public class Compra {
 			@NotNull Pais pais, 
 			Estado estado, 
 			@NotEmpty String telefone, 
-			@NotEmpty String cep,
-			@NotNull Pedido pedido) {
-		
-		System.out.println("Verificando se compra está sendo chamado");
+			@NotEmpty String cep) {
 		
 		this.email = email;
 		this.nome = nome;
@@ -102,6 +94,61 @@ public class Compra {
 		this.estado = estado;
 		this.telefone = telefone;
 		this.cep = cep;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+	
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
@@ -109,7 +156,7 @@ public class Compra {
 	public String toString() {
 		return "Compra [id=" + id + ", email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
 				+ documento + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
-				+ ", pais=" + pais.getNome() + ", estado=" + estado + ", telefone=" + telefone + ", cep=" + cep + "]";
+				+ ", pais=" + pais + ", estado=" + estado + ", telefone=" + telefone + ", cep=" + cep + "]";
 	}
 
 }

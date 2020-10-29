@@ -24,7 +24,6 @@ public class PedidoRequest {
 	private List<ItemPedidoRequest> itens;
 
 	public PedidoRequest(@NotNull @Positive BigDecimal total, @Size(min = 1) List<ItemPedidoRequest> itens) {
-		System.out.println("Estou tentando pelo menos criar o pedidoRequest");
 		this.total = total;
 		this.itens = itens;
 	}
@@ -33,7 +32,6 @@ public class PedidoRequest {
 
 		Pedido pedido = new Pedido();
 
-		System.out.println("Antes percorrer a lista de itens pedidos");
 		
 		List<ItemPedido> itensPedidos = itens.stream()
 				.map(itemPedidoRequest -> itemPedidoRequest.toModel(entityManager)).collect(Collectors.toList());

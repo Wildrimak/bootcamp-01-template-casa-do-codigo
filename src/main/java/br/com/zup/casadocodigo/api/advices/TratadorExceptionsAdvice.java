@@ -22,27 +22,27 @@ public class TratadorExceptionsAdvice {
 	@Autowired
 	private MessageSource messageSource;
 
-//	@ExceptionHandler
-//	public ResponseEntity<Map<String, String>> trataMethodArgumentNotValidException(
-//			MethodArgumentNotValidException exception) {
-//
-//		List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
-//		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-//
-//		Map<String, String> hashMap = new HashMap<String, String>();
-//
-//		globalErrors.forEach(erro -> {
-//			String message = getErrorMessage(erro);
-//			hashMap.put("ErroGlobal", message);
-//		});
-//
-//		fieldErrors.forEach(error -> {
-//			String errorMessage = getErrorMessage(error);
-//			hashMap.put(error.getField(), errorMessage);
-//		});
-//
-//		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(hashMap);
-//	}
+	@ExceptionHandler
+	public ResponseEntity<Map<String, String>> trataMethodArgumentNotValidException(
+			MethodArgumentNotValidException exception) {
+
+		List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
+		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+
+		Map<String, String> hashMap = new HashMap<String, String>();
+
+		globalErrors.forEach(erro -> {
+			String message = getErrorMessage(erro);
+			hashMap.put("ErroGlobal", message);
+		});
+
+		fieldErrors.forEach(error -> {
+			String errorMessage = getErrorMessage(error);
+			hashMap.put(error.getField(), errorMessage);
+		});
+
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(hashMap);
+	}
 
 	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> trataParaHttpMessageNotReadableException(
