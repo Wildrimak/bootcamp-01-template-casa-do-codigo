@@ -16,6 +16,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pedido {
 
@@ -24,6 +26,7 @@ public class Pedido {
 	private Integer id;
 	
 	@Valid
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Compra compra;
 

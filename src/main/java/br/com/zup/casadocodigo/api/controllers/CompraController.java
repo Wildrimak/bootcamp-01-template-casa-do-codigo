@@ -37,7 +37,7 @@ public class CompraController {
 			UriComponentsBuilder uriComponentsBuilder) {
 
 		Compra compra = request.toModel(entityManager, cupomRepository);
-
+		compra.getPedido().setCompra(compra);
 		logger.info("Compra = {} criada com sucesso!", compra);
 
 		entityManager.persist(compra);
