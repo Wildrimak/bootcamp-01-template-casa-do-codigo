@@ -11,6 +11,9 @@ import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
 import br.com.zup.casadocodigo.domain.models.Compra;
+import br.com.zup.casadocodigo.domain.models.Cupom;
+import br.com.zup.casadocodigo.domain.models.CupomAplicado;
+import br.com.zup.casadocodigo.domain.models.CupomRepository;
 import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;
 import br.com.zup.casadocodigo.domain.models.Pedido;
@@ -57,19 +60,15 @@ public class CompraRequest {
 	@NotNull
 	private PedidoRequest pedido;
 
-	public CompraRequest(@
-			NotEmpty @Email String email, 
-			@NotEmpty String nome, 
-			@NotEmpty String sobrenome,
-			@NotEmpty String documento, 
-			@NotEmpty String endereco, 
-			@NotEmpty String complemento,
-			@NotEmpty String cidade, 
-			@NotNull Integer idPais, 
-			Integer idEstado, 
-			@NotEmpty String telefone,
-			@NotEmpty String cep, 
-			@Valid PedidoRequest pedidoRequest) {
+	
+	// CupomCompraRequest -> 3
+	@Valid
+	private CupomCompraRequest cupom;
+
+	public CompraRequest(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
+			@NotEmpty String documento, @NotEmpty String endereco, @NotEmpty String complemento,
+			@NotEmpty String cidade, @NotNull Integer idPais, Integer idEstado, @NotEmpty String telefone,
+			@NotEmpty String cep, @Valid PedidoRequest pedido, @Valid CupomCompraRequest cupom) {
 
 		this.email = email;
 		this.nome = nome;
@@ -82,8 +81,8 @@ public class CompraRequest {
 		this.idEstado = idEstado;
 		this.telefone = telefone;
 		this.cep = cep;
-		this.pedido = pedidoRequest;
-
+		this.pedido = pedido;
+		this.cupom = cupom;
 	}
 
 	public boolean estaDocumentoValido() {
@@ -94,14 +93,14 @@ public class CompraRequest {
 		CNPJValidator cnpjValidator = new CNPJValidator();
 		cnpjValidator.initialize(null);
 
-		// branch oculta -> 5
+		// branch oculta -> 4
 		return cpfValidator.isValid(documento, null) || cnpjValidator.isValid(documento, null);
 
 	}
 
 	public boolean estaEstadoValido(EntityManager entityManager) {
 
-		// Uso de branch -> 3
+		// Uso de branch -> 5
 		// Eu não sei em que ordem a bean validation vai invocar as annotations
 		// Não é responsabilidade deste metodo validar se os ids são nulos, não é aqui
 		// que faz isso
@@ -109,30 +108,39 @@ public class CompraRequest {
 			return true;
 		}
 
-		// Estado -> 4
+		// Estado -> 6
 		Estado estado = entityManager.find(Estado.class, idEstado);
 		Pais pais = entityManager.find(Pais.class, idPais);
 
-		// branch oculta -> 6
+		// branch oculta -> 7
 		return pais.temEsse(estado);
 
 	}
 
-	// Falta validar se o estado ta valido, mas irei fazer isso quando criar a validation de estado pertence a pais
-	public Compra toModel(EntityManager entityManager) {
+	// CupomRepository -> 8
+	// Falta validar se o estado ta valido, mas irei fazer isso quando criar a
+	// validation de estado pertence a pais
+	public Compra toModel(EntityManager entityManager, CupomRepository cupomRepository) {
 
 		Pais pais = entityManager.find(Pais.class, this.idPais);
 		Estado estado = entityManager.find(Estado.class, this.idEstado);
 
-		// Pedido -> 7
+		// Pedido -> 9
 		Pedido pedido = this.pedido.toModel(entityManager);
-		
-		// Compra > 8
+
+		// Compra -> 10
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
 				telefone, cep);
 
-		compra.setPedido(pedido);
+		// Cupom -> 11
+		Cupom modelCupom = cupom.toModel(cupomRepository);
 		
+		// CupomAplicado -> 12
+		CupomAplicado cupomAplicado = new CupomAplicado(modelCupom);
+		
+		compra.setPedido(pedido);
+		compra.setCupomAplicado(cupomAplicado);
+
 		return compra;
 	}
 

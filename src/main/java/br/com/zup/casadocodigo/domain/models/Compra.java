@@ -2,6 +2,7 @@ package br.com.zup.casadocodigo.domain.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -61,28 +62,23 @@ public class Compra {
 
 	@NotEmpty
 	private String cep;
-	
+
 	@NotNull
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.PERSIST)
 	private Pedido pedido;
+
+	@Embedded
+	private CupomAplicado cupomAplicado;
 
 	@Deprecated
 	public Compra() {
 	}
 
-	public Compra(
-			@NotEmpty @Email String email, 
-			@NotEmpty String nome, 
-			@NotEmpty String sobrenome,
-			@NotEmpty String documento, 
-			@NotEmpty String endereco, 
-			@NotEmpty String complemento,
-			@NotEmpty String cidade, 
-			@NotNull Pais pais, 
-			Estado estado, 
-			@NotEmpty String telefone, 
+	public Compra(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
+			@NotEmpty String documento, @NotEmpty String endereco, @NotEmpty String complemento,
+			@NotEmpty String cidade, @NotNull Pais pais, Estado estado, @NotEmpty String telefone,
 			@NotEmpty String cep) {
-		
+
 		this.email = email;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -95,7 +91,7 @@ public class Compra {
 		this.telefone = telefone;
 		this.cep = cep;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -147,9 +143,17 @@ public class Compra {
 	public Pedido getPedido() {
 		return pedido;
 	}
-	
+
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public CupomAplicado getCupomAplicado() {
+		return cupomAplicado;
+	}
+
+	public void setCupomAplicado(CupomAplicado cupomAplicado) {
+		this.cupomAplicado = cupomAplicado;
 	}
 
 	@Override
