@@ -1,5 +1,8 @@
 package br.com.zup.casadocodigo.domain.models;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -148,12 +151,36 @@ public class Compra {
 		this.pedido = pedido;
 	}
 
-	public CupomAplicado getCupomAplicado() {
-		return cupomAplicado;
+	public Optional<CupomAplicado> getOptionalCupomAplicado() {
+		
+		if(cupomAplicado == null) {
+			return Optional.empty();
+		}
+		
+		return Optional.of(cupomAplicado);
 	}
 
 	public void setCupomAplicado(CupomAplicado cupomAplicado) {
 		this.cupomAplicado = cupomAplicado;
+	}
+
+	public BigDecimal calculaValorTotalComDesconto() {
+
+		BigDecimal valorTotalPedido = this.pedido.getValorTotalPedido();
+
+		if(cupomAplicado == null) {
+			return valorTotalPedido;
+		}
+		
+
+		BigDecimal percentualDecimal = this.cupomAplicado.getPercentualMomento().divide(BigDecimal.valueOf(100));
+
+		BigDecimal multiplicador = BigDecimal.ONE.subtract(percentualDecimal);
+
+		BigDecimal valorFinal = valorTotalPedido.multiply(multiplicador);
+
+		return valorFinal;
+
 	}
 
 	@Override

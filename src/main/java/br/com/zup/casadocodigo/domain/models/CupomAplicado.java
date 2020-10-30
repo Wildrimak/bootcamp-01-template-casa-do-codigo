@@ -2,6 +2,7 @@ package br.com.zup.casadocodigo.domain.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
@@ -29,12 +30,28 @@ public class CupomAplicado {
 
 	public CupomAplicado() {
 	}
-	
+
 	public CupomAplicado(Cupom cupom) {
 		this.cupom = cupom;
 		this.codigoMomento = cupom.getCodigo();
 		this.percentualMomento = cupom.getPercentual();
 		this.validadeMomento = cupom.getValidade();
+	}
+
+	public String getCodigoMomento() {
+		return codigoMomento;
+	}
+
+	public BigDecimal getPercentualMomento() {
+		return percentualMomento;
+	}
+
+	public LocalDate getValidadeMomento() {
+		return validadeMomento;
+	}
+
+	public Optional<Cupom> getOptionalCupom() {
+		return Optional.of(cupom);
 	}
 
 }

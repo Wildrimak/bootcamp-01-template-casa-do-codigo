@@ -132,15 +132,15 @@ public class CompraRequest {
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
 				telefone, cep);
 
-		// Cupom -> 11
-		Cupom modelCupom = cupom.toModel(cupomRepository);
 		
-		// CupomAplicado -> 12
-		CupomAplicado cupomAplicado = new CupomAplicado(modelCupom);
-		
-		compra.setPedido(pedido);
-		compra.setCupomAplicado(cupomAplicado);
+		// Cupom -> 11 CupomAplicado -> 12 + branch -> 13		
+		if (cupom != null) {
+			Cupom modelCupom = cupom.toModel(cupomRepository);
+			CupomAplicado cupomAplicado = new CupomAplicado(modelCupom);
+			compra.setCupomAplicado(cupomAplicado);
+		}
 
+		compra.setPedido(pedido);
 		return compra;
 	}
 
