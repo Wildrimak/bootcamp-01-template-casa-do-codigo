@@ -7,7 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.api.dtos.responses.CompraResponse;
+import br.com.zup.casadocodigo.api.validators.CpfCnpjValidator;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.CupomRepository;
 
@@ -29,6 +32,11 @@ public class CompraController {
 
 	@Autowired // > 1
 	private CupomRepository cupomRepository;
+	
+	@InitBinder
+	public void init(WebDataBinder binder) {
+		binder.addValidators(new CpfCnpjValidator());
+	}
 
 	@Transactional
 	@PostMapping // > 2

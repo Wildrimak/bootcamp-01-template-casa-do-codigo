@@ -6,10 +6,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
-import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
-
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
+import br.com.zup.casadocodigo.api.validators.ValidadoresCompra;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.Cupom;
 import br.com.zup.casadocodigo.domain.models.CupomAplicado;
@@ -60,7 +58,6 @@ public class CompraRequest {
 	@NotNull
 	private PedidoRequest pedido;
 
-	
 	// CupomCompraRequest -> 3
 	@Valid
 	private CupomCompraRequest cupom;
@@ -85,17 +82,13 @@ public class CompraRequest {
 		this.cupom = cupom;
 	}
 
-	public boolean estaDocumentoValido() {
+	// ValidadoresCompra -> 4
+	public boolean documentoValido() {
+		return ValidadoresCompra.documentoValido(documento);
+	}
 
-		CPFValidator cpfValidator = new CPFValidator();
-		cpfValidator.initialize(null);
-
-		CNPJValidator cnpjValidator = new CNPJValidator();
-		cnpjValidator.initialize(null);
-
-		// branch oculta -> 4
-		return cpfValidator.isValid(documento, null) || cnpjValidator.isValid(documento, null);
-
+	public String getDocumento() {
+		return documento;
 	}
 
 	public boolean estaEstadoValido(EntityManager entityManager) {
@@ -132,8 +125,7 @@ public class CompraRequest {
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
 				telefone, cep);
 
-		
-		// Cupom -> 11 CupomAplicado -> 12 + branch -> 13		
+		// Cupom -> 11 CupomAplicado -> 12 + branch -> 13
 		if (cupom != null) {
 			Cupom modelCupom = cupom.toModel(cupomRepository);
 			CupomAplicado cupomAplicado = new CupomAplicado(modelCupom);
