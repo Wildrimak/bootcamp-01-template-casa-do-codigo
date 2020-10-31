@@ -27,14 +27,18 @@ public class CompraResponse {
 		this.endereco = compra.getEndereco();
 		this.complemento = compra.getComplemento();
 		this.cidade = compra.getCidade();
-		this.estado = compra.getEstado().getNome();
+
+		if (compra.getEstado() != null) {
+			this.estado = compra.getEstado().getNome();
+		}
+		
 		this.pais = compra.getPais().getNome();
 		this.telefone = compra.getTelefone();
 		this.cep = compra.getCep();
 		this.pedido = new PedidoResponse(compra.getPedido());
-		
+
 		CupomAplicado cupomAplicado = compra.getOptionalCupomAplicado().orElse(null);
-		
+
 		if (cupomAplicado != null) {
 			this.cupom = new CupomAplicadoResponse(cupomAplicado, compra.calculaValorTotalComDesconto());
 		}

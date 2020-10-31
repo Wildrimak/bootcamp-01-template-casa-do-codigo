@@ -94,7 +94,7 @@ public class CompraRequest {
 	public String getDocumento() {
 		return documento;
 	}
-	
+
 	public Integer getIdPais() {
 		return idPais;
 	}
@@ -128,16 +128,20 @@ public class CompraRequest {
 	public Compra toModel(EntityManager entityManager, CupomRepository cupomRepository) {
 
 		Pais pais = entityManager.find(Pais.class, this.idPais);
-		Estado estado = entityManager.find(Estado.class, this.idEstado);
+		Estado estado = null;
 
-		// Pedido -> 9
+		// Branch -> 9
+		if (idEstado != null) {
+			estado = entityManager.find(Estado.class, this.idEstado);
+		}
+		// Pedido -> 10
 		Pedido pedido = this.pedido.toModel(entityManager);
 
-		// Compra -> 10
+		// Compra -> 11
 		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
 				telefone, cep);
 
-		// Cupom -> 11 CupomAplicado -> 12 + branch -> 13
+		// Cupom -> 12 CupomAplicado -> 13 + branch -> 14
 		if (cupom != null) {
 			Cupom modelCupom = cupom.toModel(cupomRepository);
 			CupomAplicado cupomAplicado = new CupomAplicado(modelCupom);
