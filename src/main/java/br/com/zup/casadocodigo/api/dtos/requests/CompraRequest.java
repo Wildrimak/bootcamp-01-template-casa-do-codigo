@@ -87,8 +87,20 @@ public class CompraRequest {
 		return ValidadoresCompra.documentoValido(documento);
 	}
 
+	public boolean temEstado() {
+		return ValidadoresCompra.temEstado(idEstado);
+	}
+
 	public String getDocumento() {
 		return documento;
+	}
+	
+	public Integer getIdPais() {
+		return idPais;
+	}
+
+	public Integer getIdEstado() {
+		return idEstado;
 	}
 
 	public boolean estaEstadoValido(EntityManager entityManager) {

@@ -55,6 +55,10 @@ public class Estado {
 		this.pais = pais;
 	}
 
+	public boolean pertenceAPais(Pais pais) {
+		return pais.temEsse(this);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

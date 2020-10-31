@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.api.dtos.responses.CompraResponse;
-import br.com.zup.casadocodigo.api.validators.CpfCnpjValidator;
+import br.com.zup.casadocodigo.api.validators.IniciarValidadoresControllerCompra;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.CupomRepository;
 
@@ -33,20 +33,24 @@ public class CompraController {
 	@Autowired // > 1
 	private CupomRepository cupomRepository;
 	
+	@Autowired // > 2
+	private IniciarValidadoresControllerCompra iniciarValidadoresControllerCompra;
+		
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.addValidators(new CpfCnpjValidator());
+		iniciarValidadoresControllerCompra.init(binder);
 	}
 
 	@Transactional
-	@PostMapping // > 2
+	@PostMapping // > 3
 	public ResponseEntity<?> realizarCompra(@RequestBody @Valid CompraRequest request,
 			UriComponentsBuilder uriComponentsBuilder) {
 
-		// > 3
+		// > 4
 		Compra compra = request.toModel(entityManager, cupomRepository);
 		compra.getPedido().setCompra(compra);
 		
+		// 5
 		compra.getPedido().getItensPedidos()
 			.forEach(item -> item.setPedido(compra.getPedido()));
 
@@ -56,12 +60,12 @@ public class CompraController {
 				.body(compra);
 	}
 	
-	@GetMapping("/{id}") // > 4
+	@GetMapping("/{id}") // > 6
 	public ResponseEntity<CompraResponse> detalheCompra(@PathVariable Integer id) {
 
 		Compra compra = entityManager.find(Compra.class, id);
 
-		// > 5
+		// > 7
 		if (compra == null) {
 			return ResponseEntity.notFound().build();
 		}
