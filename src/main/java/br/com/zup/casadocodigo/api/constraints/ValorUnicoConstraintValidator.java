@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.validators;
+package br.com.zup.casadocodigo.api.constraints;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 
 import br.com.zup.casadocodigo.api.annotations.ValorUnicoAnnotation;
 
-public class ValorUnicoValidator implements ConstraintValidator<ValorUnicoAnnotation, Object> {
+public class ValorUnicoConstraintValidator implements ConstraintValidator<ValorUnicoAnnotation, Object> {
 
 	private String atributo;
 	private Class<?> classe;

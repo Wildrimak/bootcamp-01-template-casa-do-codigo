@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.zup.casadocodigo.api.controllers.initializers.CompraControllerInitializerValidators;
 import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.api.dtos.responses.CompraResponse;
-import br.com.zup.casadocodigo.api.validators.IniciarValidadoresControllerCompra;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.CupomRepository;
 
@@ -34,11 +34,11 @@ public class CompraController {
 	private CupomRepository cupomRepository;
 	
 	@Autowired // > 2
-	private IniciarValidadoresControllerCompra iniciarValidadoresControllerCompra;
+	private CompraControllerInitializerValidators compraControllerInitializerValidators;
 		
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		iniciarValidadoresControllerCompra.init(binder);
+		compraControllerInitializerValidators.init(binder);
 	}
 
 	@Transactional

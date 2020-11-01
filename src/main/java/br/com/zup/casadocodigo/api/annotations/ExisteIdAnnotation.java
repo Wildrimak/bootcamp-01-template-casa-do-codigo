@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.zup.casadocodigo.api.validators.ExisteIdValidator;
+import br.com.zup.casadocodigo.api.constraints.ExisteIdConstraintValidator;
 
-@Constraint(validatedBy = ExisteIdValidator.class)
+@Constraint(validatedBy = ExisteIdConstraintValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

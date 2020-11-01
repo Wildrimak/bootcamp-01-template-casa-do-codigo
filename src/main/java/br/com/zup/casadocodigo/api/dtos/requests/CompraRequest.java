@@ -1,5 +1,7 @@
 package br.com.zup.casadocodigo.api.dtos.requests;
 
+import java.math.BigDecimal;
+
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -7,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
-import br.com.zup.casadocodigo.api.validators.ValidadoresCompra;
+import br.com.zup.casadocodigo.api.dtos.requests.utils.ValidadoresCompra;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.Cupom;
 import br.com.zup.casadocodigo.domain.models.CupomAplicado;
@@ -84,11 +86,20 @@ public class CompraRequest {
 
 	// ValidadoresCompra -> 4
 	public boolean documentoValido() {
-		return ValidadoresCompra.documentoValido(documento);
+		return ValidadoresCompra.validaDocumento(documento);
 	}
 
 	public boolean temEstado() {
-		return ValidadoresCompra.temEstado(idEstado);
+		return ValidadoresCompra.validaTemEstado(idEstado);
+	}
+	
+	public boolean valorEnviadoValido(EntityManager entityManager, CupomRepository cupomRepository) {
+		return ValidadoresCompra.validaValorPedido(entityManager, pedido, cupom, cupomRepository);
+	}
+	
+	// Isso daqui pq o cupom foi erroneamente especificado em compra e não em pedido que é o lugar certo
+	public BigDecimal getTotal() {
+		return pedido.getTotal();
 	}
 
 	public String getDocumento() {

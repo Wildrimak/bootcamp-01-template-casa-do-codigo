@@ -28,11 +28,14 @@ public class PedidoRequest {
 		this.itens = itens;
 	}
 
+	public BigDecimal getTotal() {
+		return total;
+	}
+
 	public Pedido toModel(EntityManager entityManager) {
 
 		Pedido pedido = new Pedido();
 
-		
 		List<ItemPedido> itensPedidos = itens.stream()
 				.map(itemPedidoRequest -> itemPedidoRequest.toModel(entityManager)).collect(Collectors.toList());
 
@@ -41,11 +44,10 @@ public class PedidoRequest {
 		return pedido;
 	}
 
-	public boolean totalPassadoEhIgualTotalNoServidor(EntityManager entityManager) {
+	public BigDecimal calculaValorTotalPedido(EntityManager entityManager) {
 
-		Pedido pedido = toModel(entityManager);
-
-		return pedido.getValorTotalPedido().equals(total);
+		Pedido pedido = this.toModel(entityManager);
+		return pedido.getValorTotalPedido();
 
 	}
 

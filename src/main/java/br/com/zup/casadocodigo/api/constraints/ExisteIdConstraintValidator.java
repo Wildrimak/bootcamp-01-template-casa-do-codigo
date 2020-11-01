@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.api.validators;
+package br.com.zup.casadocodigo.api.constraints;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
 
-public class ExisteIdValidator implements ConstraintValidator<ExisteIdAnnotation, Object> {
+public class ExisteIdConstraintValidator implements ConstraintValidator<ExisteIdAnnotation, Object> {
 
 	private String atributo;
 	private Class<?> classe;

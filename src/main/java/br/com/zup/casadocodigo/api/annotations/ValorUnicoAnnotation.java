@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.zup.casadocodigo.api.validators.ValorUnicoValidator;
+import br.com.zup.casadocodigo.api.constraints.ValorUnicoConstraintValidator;
 
-@Constraint(validatedBy = ValorUnicoValidator.class)
+@Constraint(validatedBy = ValorUnicoConstraintValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
