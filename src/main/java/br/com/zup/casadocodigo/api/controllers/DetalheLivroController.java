@@ -22,8 +22,10 @@ public class DetalheLivroController {
 	@GetMapping("/{id}")
 	public ResponseEntity<LivroDetalheResponse> detalheLivro(@PathVariable Integer id) {
 
+		// 1
 		Livro livro = entityManager.find(Livro.class, id);
 
+		// 2
 		if (livro == null) {
 			return ResponseEntity.notFound().build();
 		}

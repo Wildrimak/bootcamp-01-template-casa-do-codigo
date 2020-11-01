@@ -73,7 +73,6 @@ public class Compra {
 	@Embedded
 	private CupomAplicado cupomAplicado;
 
-	@Deprecated
 	public Compra() {
 	}
 
@@ -93,6 +92,27 @@ public class Compra {
 		this.estado = estado;
 		this.telefone = telefone;
 		this.cep = cep;
+	}
+
+	private Compra(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
+			@NotEmpty String documento, @NotEmpty String endereco, @NotEmpty String complemento,
+			@NotEmpty String cidade, @NotNull Pais pais, Estado estado, @NotEmpty String telefone, @NotEmpty String cep,
+			CupomAplicado cupomAplicado, @NotNull Pedido pedido) {
+
+		this.email = email;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.documento = documento;
+		this.endereco = endereco;
+		this.complemento = complemento;
+		this.cidade = cidade;
+		this.pais = pais;
+		this.estado = estado;
+		this.telefone = telefone;
+		this.cep = cep;
+		this.cupomAplicado = cupomAplicado;
+		this.pedido = pedido;
+
 	}
 
 	public Integer getId() {
@@ -152,11 +172,11 @@ public class Compra {
 	}
 
 	public Optional<CupomAplicado> getOptionalCupomAplicado() {
-		
-		if(cupomAplicado == null) {
+
+		if (cupomAplicado == null) {
 			return Optional.empty();
 		}
-		
+
 		return Optional.of(cupomAplicado);
 	}
 
@@ -168,10 +188,9 @@ public class Compra {
 
 		BigDecimal valorTotalPedido = this.pedido.getValorTotalPedido();
 
-		if(cupomAplicado == null) {
+		if (cupomAplicado == null) {
 			return valorTotalPedido;
 		}
-		
 
 		BigDecimal percentualDecimal = this.cupomAplicado.getPercentualMomento().divide(BigDecimal.valueOf(100));
 
@@ -181,6 +200,16 @@ public class Compra {
 
 		return valorFinal;
 
+	}
+
+	public Compra cloneComDadosAtualizadosDoCupomPedido(Pedido pedido, CupomAplicado cupomAplicado) {
+		Compra compraAtual = new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado,
+				telefone, cep, this.cupomAplicado, this.pedido);
+	
+		compraAtual.cupomAplicado = cupomAplicado;
+		compraAtual.pedido = pedido;
+		
+		return compraAtual;
 	}
 
 	@Override

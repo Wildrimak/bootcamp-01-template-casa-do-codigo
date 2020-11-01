@@ -31,11 +31,13 @@ public class TratadorExceptionsAdvice {
 
 		Map<String, String> hashMap = new HashMap<String, String>();
 
+		// 1
 		globalErrors.forEach(erro -> {
 			String message = getErrorMessage(erro);
 			hashMap.put("ErroGlobal", message);
 		});
 
+		// 2
 		fieldErrors.forEach(error -> {
 			String errorMessage = getErrorMessage(error);
 			hashMap.put(error.getField(), errorMessage);

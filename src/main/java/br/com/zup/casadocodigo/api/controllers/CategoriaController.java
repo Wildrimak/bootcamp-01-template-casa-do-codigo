@@ -17,7 +17,7 @@ import br.com.zup.casadocodigo.domain.models.Categoria;
 
 @RestController
 @RequestMapping("/categorias")
-public class CategoriaController { // cdd : 3
+public class CategoriaController { // cdd : 2
 
 	@PersistenceContext
 	private EntityManager manager;

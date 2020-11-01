@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import br.com.zup.casadocodigo.api.annotations.ValorUnicoAnnotation;
 
+// 1
 public class ValorUnicoConstraintValidator implements ConstraintValidator<ValorUnicoAnnotation, Object> {
 
 	private String atributo;

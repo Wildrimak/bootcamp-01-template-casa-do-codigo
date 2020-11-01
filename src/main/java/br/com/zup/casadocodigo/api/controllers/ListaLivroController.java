@@ -21,13 +21,16 @@ public class ListaLivroController {
 	@Autowired
 	EntityManager entityManager;
 
-	@GetMapping
+	@GetMapping // 1
 	public ResponseEntity<List<LivroListadoResponse>> listar() {
 
+		// 2?
 		List<?> livros = entityManager.createQuery("select l from Livro l").getResultList();
 
+		// 3
 		List<LivroListadoResponse> livrosDtoResponse = new ArrayList<>();
 
+		// 4
 		livros.forEach(livro -> {
 
 			LivroListadoResponse livroDtoResponse = new LivroListadoResponse((Livro) livro);

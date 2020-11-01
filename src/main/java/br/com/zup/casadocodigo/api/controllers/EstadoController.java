@@ -23,10 +23,11 @@ public class EstadoController {
 	private EntityManager manager;
 
 	@Transactional
-	@PostMapping
+	@PostMapping // 1
 	public ResponseEntity<?> cadastrarEstado(@Valid @RequestBody EstadoRequest request,
 			UriComponentsBuilder uriComponentsBuilder) {
 
+		// 2
 		Estado estado = request.toModel(manager);
 
 		manager.persist(estado);

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -81,7 +80,6 @@ public class LivroRequest {
 		this.dataPublicacao = dataPublicacao;
 	}
 
-	@Transactional
     public Livro toModel(EntityManager entityManager){
         
         @NotNull Autor autor = entityManager.find(Autor.class, idAutor);

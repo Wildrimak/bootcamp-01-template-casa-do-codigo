@@ -23,10 +23,11 @@ public class LivroController {
 	EntityManager entityManager;
 
 	@Transactional
-	@PostMapping
+	@PostMapping // 1
 	public ResponseEntity<?> cadastrarLivro(@Valid @RequestBody LivroRequest livroRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 
+		// 2
 		Livro livro = livroRequest.toModel(entityManager);
 
 		entityManager.persist(livro);

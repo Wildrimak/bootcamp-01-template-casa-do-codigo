@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
 
+// 1
 public class ExisteIdConstraintValidator implements ConstraintValidator<ExisteIdAnnotation, Object> {
 
 	private String atributo;
@@ -30,6 +31,7 @@ public class ExisteIdConstraintValidator implements ConstraintValidator<ExisteId
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		
+		// 2
 		// Não é aqui que validamos a obrigatoriedade do Id;
 		if(value == null) {
 			return true;

@@ -17,16 +17,17 @@ import br.com.zup.casadocodigo.domain.models.Autor;
 
 @RestController
 @RequestMapping("/autores")
-public class AutorController { // cdd : 3
+public class AutorController {
 
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Transactional
-	@PostMapping
+	@PostMapping // 1
 	public ResponseEntity<Autor> cadastrarAutor(@Valid @RequestBody AutorRequest autorRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 
+		// 2
 		Autor autor = autorRequest.toModel();
 
 		manager.persist(autor);

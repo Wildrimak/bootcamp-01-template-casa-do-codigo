@@ -17,7 +17,7 @@ import br.com.zup.casadocodigo.domain.models.Pais;
 
 @RestController
 @RequestMapping("/paises")
-public class PaisController {
+public class PaisController { // cdd: 2
 
 	@PersistenceContext
 	private EntityManager manager;

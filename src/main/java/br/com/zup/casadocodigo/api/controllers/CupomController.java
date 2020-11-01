@@ -23,13 +23,14 @@ import br.com.zup.casadocodigo.domain.models.CupomRepository;
 @RequestMapping("cupons")
 public class CupomController {
 
-	@Autowired
+	@Autowired // 1
 	private CupomRepository cupomRepository;
 
-	@PostMapping
+	@PostMapping // 2
 	public ResponseEntity<?> criarCupom(@RequestBody @Valid CupomRequest request,
 			UriComponentsBuilder uriComponentsBuilder) {
 
+		// 3
 		Cupom cupom = request.toModel();
 
 		cupomRepository.save(cupom);
@@ -39,12 +40,13 @@ public class CupomController {
 
 	}
 
-	@PutMapping("/{idCupom}")
+	@PutMapping("/{idCupom}") //4
 	public ResponseEntity<?> atualizaCupom(@RequestBody @Valid AtualizaCupomRequest request,
 			@PathVariable Integer idCupom) {
 
 		Optional<Cupom> optional = cupomRepository.findById(idCupom);
 
+		// 5
 		if (optional.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
