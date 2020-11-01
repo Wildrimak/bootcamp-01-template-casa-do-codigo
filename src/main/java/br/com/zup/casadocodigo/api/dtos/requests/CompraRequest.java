@@ -1,6 +1,7 @@
 package br.com.zup.casadocodigo.api.dtos.requests;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
@@ -60,14 +61,13 @@ public class CompraRequest {
 	@NotNull
 	private PedidoRequest pedido;
 
-	// CupomCompraRequest -> 3
-	@Valid
-	private CupomCompraRequest cupom;
+	@ExisteIdAnnotation(classe = Cupom.class, atributo = "codigo")
+	private String codigoCupom;
 
 	public CompraRequest(@NotEmpty @Email String email, @NotEmpty String nome, @NotEmpty String sobrenome,
 			@NotEmpty String documento, @NotEmpty String endereco, @NotEmpty String complemento,
 			@NotEmpty String cidade, @NotNull Integer idPais, Integer idEstado, @NotEmpty String telefone,
-			@NotEmpty String cep, @Valid PedidoRequest pedido, @Valid CupomCompraRequest cupom) {
+			@NotEmpty String cep, @Valid PedidoRequest pedido, String codigoCupom) {
 
 		this.email = email;
 		this.nome = nome;
@@ -81,7 +81,7 @@ public class CompraRequest {
 		this.telefone = telefone;
 		this.cep = cep;
 		this.pedido = pedido;
-		this.cupom = cupom;
+		this.codigoCupom = codigoCupom;
 	}
 
 	// ValidadoresCompra -> 4
@@ -92,12 +92,13 @@ public class CompraRequest {
 	public boolean temEstado() {
 		return ValidadoresCompra.validaTemEstado(idEstado);
 	}
-	
+
 	public boolean valorEnviadoValido(EntityManager entityManager, CupomRepository cupomRepository) {
-		return ValidadoresCompra.validaValorPedido(entityManager, pedido, cupom, cupomRepository);
+		return ValidadoresCompra.validaValorPedido(entityManager, pedido, codigoCupom, cupomRepository);
 	}
-	
-	// Isso daqui pq o cupom foi erroneamente especificado em compra e não em pedido que é o lugar certo
+
+	// Isso daqui pq o cupom foi erroneamente especificado em compra e não em pedido
+	// que é o lugar certo
 	public BigDecimal getTotal() {
 		return pedido.getTotal();
 	}
@@ -112,6 +113,10 @@ public class CompraRequest {
 
 	public Integer getIdEstado() {
 		return idEstado;
+	}
+
+	public Optional<String> getCodigoCupom() {
+		return Optional.ofNullable(codigoCupom);
 	}
 
 	public boolean estaEstadoValido(EntityManager entityManager) {
@@ -153,8 +158,8 @@ public class CompraRequest {
 				telefone, cep);
 
 		// Cupom -> 12 CupomAplicado -> 13 + branch -> 14
-		if (cupom != null) {
-			Cupom modelCupom = cupom.toModel(cupomRepository);
+		if (codigoCupom != null) {
+			Cupom modelCupom = cupomRepository.findByCodigo(codigoCupom).get();
 			CupomAplicado cupomAplicado = new CupomAplicado(modelCupom);
 			compra.setCupomAplicado(cupomAplicado);
 		}

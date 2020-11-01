@@ -65,6 +65,10 @@ public class Cupom {
 	public Integer getId() {
 		return id;
 	}
+	
+	public boolean estaValido() {
+		return LocalDate.now().compareTo(this.validade) <= 0;
+	}
 
 	public void atualizarCupom(Cupom cupomAtualizado) {
 

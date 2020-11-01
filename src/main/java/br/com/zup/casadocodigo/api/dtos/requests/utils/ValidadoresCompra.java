@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
-import br.com.zup.casadocodigo.api.dtos.requests.CupomCompraRequest;
 import br.com.zup.casadocodigo.api.dtos.requests.PedidoRequest;
 import br.com.zup.casadocodigo.domain.models.Cupom;
 import br.com.zup.casadocodigo.domain.models.CupomRepository;
@@ -34,17 +33,17 @@ public interface ValidadoresCompra {
 	// Todo esse problema pq cupom está especificado para ser em compra e não em
 	// pedido que é o lugar correto dele!
 	public static boolean validaValorPedido(EntityManager entityManager, PedidoRequest pedido,
-			CupomCompraRequest cupomRequest, CupomRepository cupomRepository) {
+			String codigoCupom, CupomRepository cupomRepository) {
 
 		BigDecimal totalEnviadoCliente = pedido.getTotal();
 		BigDecimal totalCalculadoServidor = pedido.calculaValorTotalPedido(entityManager);
 
 		// 3
-		if (cupomRequest == null) {
+		if (codigoCupom == null) {
 			return totalCalculadoServidor.compareTo(totalEnviadoCliente) == 0;
 		}
 
-		Optional<Cupom> optional = cupomRepository.findByCodigo(cupomRequest.getCodigo());
+		Optional<Cupom> optional = cupomRepository.findByCodigo(codigoCupom);
 		boolean ehValido = false;
 		// 4
 		if (optional.isPresent()) {

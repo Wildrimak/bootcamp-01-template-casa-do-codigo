@@ -29,6 +29,12 @@ public class ExisteIdConstraintValidator implements ConstraintValidator<ExisteId
 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		
+		// Não é aqui que validamos a obrigatoriedade do Id;
+		if(value == null) {
+			return true;
+		}
+		
 		Query query = manager.createQuery("select 1 from " + classe.getName() + "" + " where " + atributo + "=:value");
 		query.setParameter("value", value);
 
