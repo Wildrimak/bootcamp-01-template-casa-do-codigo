@@ -18,7 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Compra {
+public class Compra { // cdd: 6
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -173,7 +173,7 @@ public class Compra {
 
 	public Optional<CupomAplicado> getOptionalCupomAplicado() {
 
-		if (cupomAplicado == null) {
+		if (cupomAplicado == null) { // 1
 			return Optional.empty();
 		}
 
@@ -188,7 +188,7 @@ public class Compra {
 
 		BigDecimal valorTotalPedido = this.pedido.getValorTotalPedido();
 
-		if (cupomAplicado == null) {
+		if (cupomAplicado == null) { // 1
 			return valorTotalPedido;
 		}
 

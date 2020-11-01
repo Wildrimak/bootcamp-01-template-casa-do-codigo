@@ -3,7 +3,7 @@ package br.com.zup.casadocodigo.api.dtos.responses;
 import br.com.zup.casadocodigo.domain.models.Compra;
 import br.com.zup.casadocodigo.domain.models.CupomAplicado;
 
-public class CompraResponse {
+public class CompraResponse { // cdd: 6?
 
 	private String email;
 	private String nome;
@@ -16,8 +16,8 @@ public class CompraResponse {
 	private String pais;
 	private String telefone;
 	private String cep;
-	private PedidoResponse pedido;
-	private CupomAplicadoResponse cupom;
+	private PedidoResponse pedido; // 1
+	private CupomAplicadoResponse cupom; // 1
 
 	public CompraResponse(Compra compra) {
 		this.email = compra.getEmail();
@@ -28,7 +28,7 @@ public class CompraResponse {
 		this.complemento = compra.getComplemento();
 		this.cidade = compra.getCidade();
 
-		if (compra.getEstado() != null) {
+		if (compra.getEstado() != null) { // 1
 			this.estado = compra.getEstado().getNome();
 		}
 		
@@ -37,9 +37,10 @@ public class CompraResponse {
 		this.cep = compra.getCep();
 		this.pedido = new PedidoResponse(compra.getPedido());
 
+		// 1 e 1?
 		CupomAplicado cupomAplicado = compra.getOptionalCupomAplicado().orElse(null);
 
-		if (cupomAplicado != null) {
+		if (cupomAplicado != null) { // 1
 			this.cupom = new CupomAplicadoResponse(cupomAplicado, compra.calculaValorTotalComDesconto());
 		}
 	}

@@ -8,7 +8,7 @@ import br.com.zup.casadocodigo.api.annotations.ExisteIdAnnotation;
 import br.com.zup.casadocodigo.domain.models.ItemPedido;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
-public class ItemPedidoRequest {
+public class ItemPedidoRequest { // cdd: 2
 
 	@NotNull
 	@ExisteIdAnnotation(classe = Livro.class, atributo = "id")

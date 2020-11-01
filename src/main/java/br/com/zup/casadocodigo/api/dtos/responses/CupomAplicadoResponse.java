@@ -12,6 +12,7 @@ public class CupomAplicadoResponse {
 	private LocalDate validadeMomento;
 	private BigDecimal valorTotalComDesconto;
 
+	// 1
 	public CupomAplicadoResponse(CupomAplicado cupomAplicado, BigDecimal valorFinal) {
 		this.codigoMomento = cupomAplicado.getCodigoMomento();
 		this.percentualMomento = cupomAplicado.getPercentualMomento();

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
-public class Cupom {
+public class Cupom { // cdd: 0?
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

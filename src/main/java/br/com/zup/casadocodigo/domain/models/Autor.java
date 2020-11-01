@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Autor {
+public class Autor { // cdd: 0
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

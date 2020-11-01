@@ -12,12 +12,12 @@ import br.com.zup.casadocodigo.domain.models.Cupom;
 import br.com.zup.casadocodigo.domain.models.CupomRepository;
 
 @Component
-public class CupomValidoValidator implements Validator {
+public class CupomValidoValidator implements Validator { // cdd: 7
 
-	@Autowired
+	@Autowired // 1
 	private CupomRepository cupomRepository;
 
-	@Override
+	@Override // 1
 	public boolean supports(Class<?> clazz) {
 		return CompraRequest.class.isAssignableFrom(clazz);
 	}
@@ -30,25 +30,24 @@ public class CupomValidoValidator implements Validator {
 			return;
 		}
 
-		// 2
 		CompraRequest request = (CompraRequest) target;
 
 		Optional<String> possivelCodigoCupom = request.getCodigoCupom();
 
-		// 4
+		// 1
 		if (possivelCodigoCupom.isPresent()) {
 
 			Optional<Cupom> optionalCupom = cupomRepository.findByCodigo(possivelCodigoCupom.get());
 
-			// 5
+			// 1
 			if (optionalCupom.isEmpty()) {
 				return;
 			}
 
-			// 6
+			// 1
 			Cupom cupom = optionalCupom.get();
 
-			// 7
+			// 1
 			if (!cupom.estaValido()) {
 				errors.rejectValue("codigoCupom", null, "Este cupom não é mais válido");
 			}

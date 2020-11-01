@@ -13,15 +13,7 @@ import javax.validation.constraints.Positive;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ItemPedido {
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
+public class ItemPedido { // cdd: 2
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +53,14 @@ public class ItemPedido {
 
 	public void setLivro(Livro livro) {
 		this.livro = livro;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	public Integer getQuantidade() {

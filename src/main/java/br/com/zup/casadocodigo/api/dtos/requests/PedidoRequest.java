@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import br.com.zup.casadocodigo.domain.models.ItemPedido;
 import br.com.zup.casadocodigo.domain.models.Pedido;
 
-public class PedidoRequest {
+public class PedidoRequest { // cdd: 4
 
 	@NotNull
 	@Positive
@@ -21,7 +21,7 @@ public class PedidoRequest {
 
 	@Size(min = 1)
 	@Valid
-	private List<ItemPedidoRequest> itens;
+	private List<ItemPedidoRequest> itens; // 1
 
 	public PedidoRequest(@NotNull @Positive BigDecimal total, @Size(min = 1) List<ItemPedidoRequest> itens) {
 		this.total = total;
@@ -34,8 +34,9 @@ public class PedidoRequest {
 
 	public Pedido toModel(EntityManager entityManager) {
 
-		Pedido pedido = new Pedido();
+		Pedido pedido = new Pedido(); // 1
 
+		// 1 e 1
 		List<ItemPedido> itensPedidos = itens.stream()
 				.map(itemPedidoRequest -> itemPedidoRequest.toModel(entityManager)).collect(Collectors.toList());
 

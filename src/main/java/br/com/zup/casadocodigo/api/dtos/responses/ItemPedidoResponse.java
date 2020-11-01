@@ -9,12 +9,13 @@ public class ItemPedidoResponse {
 	
 	private Integer quantidade;
 	private BigDecimal valorTotalItem;
-	private LivroDetalheResponse livro;
+	private LivroDetalheResponse livro; // 1
 
+	// 1
 	public ItemPedidoResponse(ItemPedido itemPedido) {
 		this.quantidade = itemPedido.getQuantidade();
 		this.valorTotalItem = itemPedido.getValorTotalItem();
-		Livro livroReal = itemPedido.getLivro();
+		Livro livroReal = itemPedido.getLivro(); // 1
 		this.livro = new LivroDetalheResponse(livroReal);
 	}
 

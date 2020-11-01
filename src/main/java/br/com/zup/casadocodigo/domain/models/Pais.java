@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Pais {
+public class Pais { // cdd: 1
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,6 @@ public class Pais {
 	@OneToMany(mappedBy = "pais", cascade = CascadeType.ALL)
 	private Set<Estado> estados;
 
-	@Deprecated
 	public Pais() {
 		this.estados = new HashSet<>();
 	}

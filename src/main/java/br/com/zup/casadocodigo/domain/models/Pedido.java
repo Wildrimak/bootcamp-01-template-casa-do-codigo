@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Pedido {
+public class Pedido { // cdd: 4
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +60,7 @@ public class Pedido {
 	}
 
 	public void setItensPedidos(List<ItemPedido> itensPedidos) {
-		itensPedidos.forEach(item -> {
+		itensPedidos.forEach(item -> { // 1
 			this.addItemPedido(item);
 		});
 	}
@@ -71,6 +71,7 @@ public class Pedido {
 
 	public BigDecimal getValorTotalPedido() {
 
+		// 1
 		BigDecimal total = this.itensPedidos.stream().map(ItemPedido::getValorTotalItem).reduce(BigDecimal.ZERO,
 				BigDecimal::add);
 

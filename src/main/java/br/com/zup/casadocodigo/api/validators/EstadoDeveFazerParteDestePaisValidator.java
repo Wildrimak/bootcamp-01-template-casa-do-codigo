@@ -11,14 +11,14 @@ import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;
 
-@Component
+@Component // cdd: 6
 public class EstadoDeveFazerParteDestePaisValidator implements Validator {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public boolean supports(Class<?> clazz) { // 1
 		return CompraRequest.class.isAssignableFrom(clazz);
 	}
 
@@ -32,16 +32,16 @@ public class EstadoDeveFazerParteDestePaisValidator implements Validator {
 
 		CompraRequest request = (CompraRequest) target;
 
-		// 2
+		// 1
 		if (request.temEstado()) {
 
-			// 3
+			// 1
 			Pais pais = entityManager.find(Pais.class, request.getIdPais());
 
-			// 4
+			// 1
 			Estado estado = entityManager.find(Estado.class, request.getIdEstado());
 
-			// 5
+			// 1
 			if (!estado.pertenceAPais(pais)) {
 				errors.rejectValue("idEstado", null, "Este estado não é o do país selecionado");
 			}

@@ -9,7 +9,7 @@ import br.com.zup.casadocodigo.api.annotations.ValorUnicoAnnotation;
 import br.com.zup.casadocodigo.domain.models.Estado;
 import br.com.zup.casadocodigo.domain.models.Pais;
 
-public class EstadoRequest {
+public class EstadoRequest { // cdd: 2?
 
 	@NotEmpty
 	@ValorUnicoAnnotation(atributo = "nome", classe = Estado.class)

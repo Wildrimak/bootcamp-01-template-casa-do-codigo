@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-public class ItemPedidoTest {
+public class ItemPedidoTest { // cdd: 2
 
 	@Test
 	public void testaCalculoValorTotal() {

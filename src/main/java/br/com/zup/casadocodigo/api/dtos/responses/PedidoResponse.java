@@ -11,14 +11,17 @@ import br.com.zup.casadocodigo.domain.models.Pedido;
 public class PedidoResponse {
 
 	private BigDecimal valorTotalPedido;
-	private List<ItemPedidoResponse> itens;
+	private List<ItemPedidoResponse> itens; // 1
 
-	public PedidoResponse(Pedido pedido) {
+	public PedidoResponse(Pedido pedido) { // 1
 		this.valorTotalPedido = pedido.getValorTotalPedido();
 		setItensPedidoResponse(pedido.getItensPedidos());
 	}
 
+	// 1
 	private void setItensPedidoResponse(List<ItemPedido> itensPedidos) {
+		
+		// 1
 		List<ItemPedidoResponse> itens = itensPedidos
 				.stream()
 				.map(itemPedido -> new ItemPedidoResponse(itemPedido))

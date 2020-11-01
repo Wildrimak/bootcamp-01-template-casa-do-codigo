@@ -19,7 +19,7 @@ public class Estado {
 	@Column(nullable = false)
 	private String nome;
 
-	@ManyToOne
+	@ManyToOne // 1
 	private Pais pais;
 
 	@Deprecated

@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import br.com.zup.casadocodigo.domain.models.Livro;
-import lombok.Getter;
 
-@Getter
 public class LivroListadoResponse {
 
 	private Integer id;
@@ -20,7 +18,7 @@ public class LivroListadoResponse {
 	private Integer idCategoria;
 	private Integer idAutor;
 
-	public LivroListadoResponse(Livro livro) {
+	public LivroListadoResponse(Livro livro) { // 1
 
 		this.id = livro.getId();
 		this.titulo = livro.getTitulo();
@@ -33,6 +31,46 @@ public class LivroListadoResponse {
 		this.idCategoria = livro.getCategoria().getId();
 		this.idAutor = livro.getAutor().getId();
 
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public String getResumo() {
+		return resumo;
+	}
+
+	public String getSumario() {
+		return sumario;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public Integer getQuantidadePaginas() {
+		return quantidadePaginas;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public Integer getIdCategoria() {
+		return idCategoria;
+	}
+
+	public Integer getIdAutor() {
+		return idAutor;
 	}
 
 }

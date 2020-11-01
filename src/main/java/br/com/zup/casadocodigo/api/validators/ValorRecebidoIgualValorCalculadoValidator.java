@@ -11,24 +11,24 @@ import org.springframework.validation.Validator;
 import br.com.zup.casadocodigo.api.dtos.requests.CompraRequest;
 import br.com.zup.casadocodigo.domain.models.CupomRepository;
 
-@Component
+@Component // cdd: 4
 public class ValorRecebidoIgualValorCalculadoValidator implements Validator {
 
-	@PersistenceContext // 1
+	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Autowired // 2
+	@Autowired // 1
 	private CupomRepository cupomRepository;
 
 	@Override 
-	public boolean supports(Class<?> clazz) {
+	public boolean supports(Class<?> clazz) { // 1
 		return CompraRequest.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		// 3
+		// 1
 		if (errors.hasErrors()) {
 			return;
 		}
@@ -37,7 +37,7 @@ public class ValorRecebidoIgualValorCalculadoValidator implements Validator {
 
 		boolean valido = request.valorEnviadoValido(entityManager, cupomRepository);
 
-		// 4
+		// 1
 		if (!valido) {
 			errors.rejectValue("total", null, "Este valor não bate com o que foi calculado no servidor!");
 		}

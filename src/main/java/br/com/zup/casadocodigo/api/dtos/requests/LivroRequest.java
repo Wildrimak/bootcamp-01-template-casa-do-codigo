@@ -21,7 +21,7 @@ import br.com.zup.casadocodigo.domain.models.Categoria;
 import br.com.zup.casadocodigo.domain.models.Livro;
 
 
-public class LivroRequest {
+public class LivroRequest { // cdd: 3
 
 	@NotEmpty
 	@ValorUnicoAnnotation(atributo = "titulo", classe = Livro.class)

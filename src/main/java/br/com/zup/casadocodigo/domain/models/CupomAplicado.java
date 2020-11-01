@@ -26,7 +26,7 @@ public class CupomAplicado {
 	private LocalDate validadeMomento;
 
 	@ManyToOne
-	private Cupom cupom;
+	private Cupom cupom; // 1
 
 	public CupomAplicado() {
 	}

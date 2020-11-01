@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-public class PedidoTest {
+public class PedidoTest { // cdd: 3
 
 	@Test
 	public void verificaValorTotalPedido() {

@@ -30,7 +30,7 @@ public class CupomRequest {
 		this.validade = validade;
 	}
 
-	public Cupom toModel() {
+	public Cupom toModel() { // 1
 		return new Cupom(codigo, percentual, validade);
 	}
 
